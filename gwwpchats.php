@@ -4,14 +4,14 @@
  Plugin URI: 
  Description: Adds messaging buttons to profiles.
  Author: GippslandWeb
- Version: 1.0.2
+ Version: 1.0.3
  Author URI: https://gippslandweb.com.au
  GitHub Plugin URI: Gippsland-Web/gw-bp-wpc-integration
  */
 
  class GW_WPCIntegration {
      public function __construct() {
-        add_action('bp_member_header_actions',array($this,'display_msg_button') );
+        add_action('bp_profile_header_meta',array($this,'display_msg_button') );
     }
 
 //Display Member type in the Profile header
@@ -19,19 +19,24 @@ function display_msg_button() {
 if(!is_user_logged_in())
     return;
     if(get_current_user_id() != bp_displayed_user_id())
-        echo('<div class="message-button  generic-button" id="message-button"><a href="/wpc-messages/'.bp_core_get_username(bp_displayed_user_id()).'/">Send Message</a></div>');
+        echo('<div class="et_pb_text et_pb_module et_pb_bg_layout_light et_pb_text_0"><a class="messagebtn et_pb_button  et_pb_button_0 et_pb_module et_pb_bg_layout_light" href="/wpc-messages/'.bp_core_get_username(bp_displayed_user_id()).'/">Send Message</a></div>');
     else
         {
             $cnt = $this->unread_counter(get_current_user_id());
             if($cnt > 0)
-                echo('<div class="message-button  generic-button" id="message-button"><a href="/wpc-messages/">'.$cnt.' New Message</a></div>');
+                echo('<div class="et_pb_text et_pb_module et_pb_bg_layout_light et_pb_text_0"><a class="messagebtn et_pb_button  et_pb_button_0 et_pb_module et_pb_bg_layout_light" href="/wpc-messages/">'.$cnt.' New Message</a></div>');
             else
-                    echo('<div class="message-button  generic-button" id="message-button"><a href="/wpc-messages/">View Message</a></div>');
+                    echo('<div class="et_pb_text et_pb_module et_pb_bg_layout_light et_pb_text_0"><a class="messagebtn et_pb_button  et_pb_button_0 et_pb_module et_pb_bg_layout_light" href="/wpc-messages/">View Message</a></div>');
 
         }
     
-  // $this->se_start_chat_btn_by_user(bp_displayed_user_id());
 }
+
+
+
+
+
+
 
 function unread_counter($user_id=0) {
 	if ( !$user_id ) {
