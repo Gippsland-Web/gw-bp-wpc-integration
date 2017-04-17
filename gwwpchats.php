@@ -11,7 +11,7 @@
 
  class GW_WPCIntegration {
      public function __construct() {
-        add_action('bp_profile_header_meta',array($this,'display_msg_button') );
+        add_action('bp_member_header_actions',array($this,'display_msg_button') );
 
         add_filter('bp_follow_get_add_follow_button', array($this,'style_follow_button'),10,3);
     }
